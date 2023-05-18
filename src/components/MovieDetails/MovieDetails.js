@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import END_POINTS from '../../services/END_POINTS';
 import getMovies from 'services/getMovies';
+import noImage from '../../images/no_image.jpg';
 
 const MovieDetails = () => {
   const [page] = useState(1);
@@ -18,9 +19,32 @@ const MovieDetails = () => {
 
   console.log(movieDetails);
 
+  const { title, overview, genres } = movieDetails;
+
+  console.log(genres);
+
   return (
     <>
-      <h1>{movieDetails.title}</h1>
+      <h1>{title}</h1>
+      <img
+        src={
+          movieDetails.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
+            : noImage
+        }
+        alt={movieDetails.title}
+        width="250"
+      />
+
+      <h2>Overview</h2>
+      <p>{overview}</p>
+      <p>User Score: {movieDetails.vote_average * 10}%</p>
+      <h2>Genres</h2>
+      {/* <ul>
+        {genres.map(genre => (
+          <li key={genre.id}>{genre.name}</li>
+        ))}
+      </ul> */}
     </>
   );
 };

@@ -14,8 +14,6 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(moviesInTrend);
-
   return (
     <>
       <h1>Trending today</h1>;

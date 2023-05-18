@@ -1,0 +1,10 @@
+.movieDetails{
+display: flex;
+gap: 16px
+}
+
+.genres{
+display: flex;
+gap: 16px
+
+}

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import END_POINTS from '../../services/END_POINTS';
 import getMovies from 'services/getMovies';
 import noImage from '../../images/no_image.jpg';
+
+import css from './MovieDetails.module.css'
 
 const MovieDetails = () => {
   const [page] = useState(1);
@@ -19,14 +21,12 @@ const MovieDetails = () => {
 
   console.log(movieDetails);
 
-  const { title, overview, genres } = movieDetails;
+  const { title, overview } = movieDetails;
 
-  console.log(genres);
-
-  return (
-    <>
-      <h1>{title}</h1>
-      <img
+  return (<>
+    <div className={css.movieDetails}>
+        <div>
+        <img
         src={
           movieDetails.poster_path
             ? `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
@@ -35,17 +35,42 @@ const MovieDetails = () => {
         alt={movieDetails.title}
         width="250"
       />
+        </div>
+     
 
-      <h2>Overview</h2>
+      <div>
+       <h1>{title}</h1>
+       <p>User Score: {movieDetails.vote_average * 10}%</p>
+
+      <h3>Overview</h3>
       <p>{overview}</p>
-      <p>User Score: {movieDetails.vote_average * 10}%</p>
-      <h2>Genres</h2>
-      {/* <ul>
-        {genres.map(genre => (
-          <li key={genre.id}>{genre.name}</li>
-        ))}
-      </ul> */}
+      
+
+      {movieDetails.genres && (
+        <>
+          <h3>Genres</h3>
+          <ul className={css.genres}>
+            {movieDetails.genres.map(genre => (
+              <li key={genre.id}>{genre.name}</li>
+            ))}
+          </ul>
+        </>
+      )}
+      </div>
+
+    </div>
+    <hr/>
+    <div>
+        <p>Additional information</p>
+        <ul>
+            <li><Link>Cast</Link></li>
+            <li><Link>Reviews</Link></li>
+        </ul>
+    </div>
+    <Outlet />
     </>
+     
+  
   );
 };
 

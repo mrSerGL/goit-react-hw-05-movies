@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import getMovies from 'services/getMovies';
+import noImage from '../../images/no_image.jpg';
 import END_POINTS from '../../services/END_POINTS';
 import API_KEY from '../../services/API_KEY';
 
@@ -47,7 +48,18 @@ const Home = () => {
                 state: { from: location },
               }}
               className={css.link}
-            >        <span className={css.movieTitle}>{movie.title}</span></Link>
+            > 
+                <img width="250px"
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                        : noImage
+                    }
+                    alt={movie.title}
+                    className={css.poster}
+                  />      
+             {/* <span className={css.movieTitle}>{movie.title}</span> */}
+             </Link>
     
           </li>
         ))}

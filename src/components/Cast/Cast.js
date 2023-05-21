@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import END_POINTS from '../../services/END_POINTS';
 import API_KEY from '../../services/API_KEY';
 import getMovies from 'services/getMovies';
@@ -8,16 +8,10 @@ import css from './Cast.module.css';
 import noImage from '../../images/no_image.jpg';
 
 const Cast = () => {
-  // const [page] = useState(1);
   const [end_point] = useState(END_POINTS.movieCredits);
   const [cast, setCast] = useState([]);
 
-    const { id } = useParams();
-
-    console.log(id)
-
-  // const location = useLocation();
-  // const id = location.state;
+  const { id } = useParams();
 
   const url = `/movie/${id}${end_point}?api_key=${API_KEY}&language=en-US`;
 
@@ -25,8 +19,6 @@ const Cast = () => {
     getMovies(url).then(response => setCast(response.data.cast));
     // eslint-disable-next-line
   }, []);
-
-  console.log(cast);
 
   return (
     <ul className={css.cast}>

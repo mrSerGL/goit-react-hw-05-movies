@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
 
 import END_POINTS from '../../services/END_POINTS';
 import API_KEY from '../../services/API_KEY';
@@ -14,6 +14,7 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const url = `${end_point}${id}?api_key=${API_KEY}&page=${page}&language=en-US&include_adult=false`;
 
@@ -22,13 +23,14 @@ const MovieDetails = () => {
     // eslint-disable-next-line
   }, []);
 
-  //   console.log(movieDetails);
 
   const { title, overview } = movieDetails;
 
   return (
     <>
+    	<button type="button" onClick={() => navigate(-1)}>Back</button>
       <div className={css.movieDetails}>
+    
         <div>
           <img
             src={
@@ -43,7 +45,7 @@ const MovieDetails = () => {
 
         <div>
           <h1>{title}</h1>
-          <p>User Score: {movieDetails.vote_average * 10}%</p>
+          <p>User Score: {(movieDetails.vote_average * 10).toFixed(0)}%</p>
 
           <h3>Overview</h3>
           <p>{overview}</p>

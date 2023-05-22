@@ -52,8 +52,11 @@ const Movies = () => {
   }, [searchQuery]);
 
   const onHandleSubmit = query => {
-    setSearchParams({ query: query });
-    setSearchQuery(query);
+
+    const nextParam = query !== "" ?  query  : {};
+ 
+    setSearchParams({ query: nextParam });
+    setSearchQuery(nextParam);
   };
 
   return (

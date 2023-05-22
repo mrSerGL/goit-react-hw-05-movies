@@ -1,18 +1,22 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
-//const Support = lazy(() => import('components/support/Support.js'));
-
-import MovieDetails from './MovieDetails';
-import Movies from './Movies';
-import Cast from './Cast/';
-import Reviews from './Reviews';
-
-import NotFound from './NotFound';
+// import MovieDetails from './MovieDetails';
+// import Movies from './Movies';
+// import Cast from './Cast/';
+// import Reviews from './Reviews';
+// import NotFound from './NotFound';
 
 import css from './App.module.css';
 
-const Home = lazy(() => import('./Home/Home.js'));
+//const Support = lazy(() => import('components/support/Support.js'));
+
+const Home = lazy(() => import('./Home'));
+const MovieDetails = lazy(() => import('./MovieDetails'));
+const Movies = lazy(() => import('./Movies'));
+const Cast = lazy(() => import('./Cast/'));
+const Reviews = lazy(() => import('./Reviews'));
+const NotFound = lazy(() => import('./NotFound'));
 
 const routes = [
   { path: '/', text: 'Home' },

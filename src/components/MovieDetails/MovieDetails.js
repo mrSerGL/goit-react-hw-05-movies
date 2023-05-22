@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, Outlet, useNavigate } from 'react-router-dom';
 
+
 import END_POINTS from '../../services/END_POINTS';
 import API_KEY from '../../services/API_KEY';
 import getMovies from 'services/getMovies';
 import noImage from '../../images/no_image.jpg';
+import translateText from '../../services/getTranslate'
+
 
 import css from './MovieDetails.module.css';
 
@@ -12,6 +15,9 @@ const MovieDetails = () => {
   const [page] = useState(1);
   const [end_point] = useState(END_POINTS.movieDetails);
   const [movieDetails, setMovieDetails] = useState([]);
+  const [translatedReview, setTranslatedReview ]  = useState('');
+
+
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,6 +31,10 @@ const MovieDetails = () => {
 
 
   const { title, overview } = movieDetails;
+
+  translateText(overview).then(translate => setTranslatedReview(translate))
+
+
 
   return (
     <>
@@ -47,8 +57,10 @@ const MovieDetails = () => {
           <h1>{title}</h1>
           <p>User Score: {(movieDetails.vote_average * 10).toFixed(0)}%</p>
 
-          <h3>Overview</h3>
-          <p>{overview}</p>
+          <h3>Overview </h3>
+          <div>{overview}</div>
+        
+          <div className={css.overviewUkr}>{translatedReview}</div>
 
           {movieDetails.genres && (
             <>

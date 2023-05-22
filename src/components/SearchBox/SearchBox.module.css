@@ -1,20 +1,43 @@
-/* .Wrapper{ 
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-};
+.form {
+  margin: 30px auto 20px;
+  text-align: center;
+}
 
-.Input {
-  padding: 8px 32px 8px 8px;
+.input {
+  padding: 8px 20px;
   border-radius: 4px;
-  font: inherit;
-};
+  outline: #527c82;
+  border-color: transparent;
+}
 
-.Icon {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 6px;
-}; */
+.button {
+  margin: 0px 10px 10px;
+  padding: 8px 24px 8px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  line-height: 1;
+
+  text-align: center;
+
+  cursor: pointer;
+  background-color: gray;
+
+  border-radius: 2px;
+  color: #fff;
+  box-shadow: inset rgba(0, 0, 0, 0.541) -3px -3px 8px,
+    inset rgba(255, 253, 253, 0.9) 3px 3px 8px,
+    rgba(0, 0, 0, 0.8) 3px 3px 8px -3px;
+  transition: all 150ms ease-in-out;
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.356);
+  color: #fff;
+  /* box-shadow: 0 0 10px 0 #527c82 inset, 0 0 10px 4px #527c82; */
+}
+
+.button:hover,
+.button:focus {
+  outline: 0;
+}

@@ -28,7 +28,7 @@ const MovieDetails = () => {
 
   return (
     <>
-    	<button type="button" onClick={() => navigate(-1)}>Back</button>
+    	<button type="button" className={css.button} onClick={() => navigate(-1)}>Back</button>
       <div className={css.movieDetails}>
     
         <div>

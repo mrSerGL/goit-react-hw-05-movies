@@ -11,26 +11,30 @@ import noImage from '../../images/no_image.jpg';
 import css from './Movies.module.css';
 
 const Movies = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(null);
-  const [searchResult, setSearchResult] = useState([]);
-
   const [page] = useState(1);
   const [end_point] = useState(END_POINTS.querySearch);
   const location = useLocation();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+
   // setSearchQuery(searchParams.get('query'));
 
   useEffect(() => {
-    setSearchQuery(searchParams.get('query'));
+    const searchParam = searchParams.get('query');
 
-    if (searchParams === '' || searchParams === 'null') {
+    if (searchParam === '' || searchParam === 'null') {
       return;
     }
+
+    setSearchQuery(searchParam);
   }, [searchParams]);
 
   useEffect(() => {
-    if (searchQuery === '' || searchQuery === 'null') {
+
+    console.log(searchQuery)
+    if (searchQuery === '' || searchQuery === 'null' || searchQuery === null) {
       return;
     }
 

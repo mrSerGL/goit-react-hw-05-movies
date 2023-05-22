@@ -10,6 +10,7 @@ ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
 
    <BrowserRouter basename="/goit-react-hw-05-movies">
+
       <App />
     </BrowserRouter>
   </React.StrictMode>

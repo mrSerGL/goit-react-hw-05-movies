@@ -35,7 +35,9 @@ const Home = () => {
       <h1>Trending today</h1>
 
       <ul className={css.movieList}>
-        {moviesInTrend.map(movie => (
+
+
+          {moviesInTrend.map(movie => (
           <li key={movie.id} className={css.moviesItem}>
             <Link
               to={{
@@ -54,7 +56,7 @@ const Home = () => {
                 alt={movie.title}
                 className={css.poster}
               />
-              {/* <span className={css.movieTitle}>{movie.title}</span> */}
+              <span className={css.movieTitle}>{movie.title}</span>
             </Link>
           </li>
         ))}

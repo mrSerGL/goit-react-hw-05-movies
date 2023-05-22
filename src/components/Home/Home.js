@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import getMovies from 'services/getMovies';
 import noImage from '../../images/no_image.jpg';
 import END_POINTS from '../../services/END_POINTS';
@@ -18,26 +20,19 @@ const Home = () => {
   const url = `${end_point}${id}?api_key=${API_KEY}&page=${page}&language=en-US&include_adult=false`;
 
   useEffect(() => {
-    getMovies(url).then(response => setmoviesInTrend(response.data.results));
+    getMovies(url).then(response => {
+      if (response.data.results.length === 0) {
+        Notify.failure('Please check the request and try again!');
+      }
+
+      setmoviesInTrend(response.data.results);
+    });
     // eslint-disable-next-line
   }, []);
 
   return (
     <>
       <h1>Trending today</h1>
-      {/* <ul className={css.movieList}>
-        {moviesInTrend.map(movie => (
-          <li key={movie.id}>
-            <Link
-              to={{
-                pathname: `movies/${movie.id}`,
-              }}
-            >
-              <span>{movie.title}</span>
-            </Link>
-          </li>
-        ))}
-      </ul> */}
 
       <ul className={css.movieList}>
         {moviesInTrend.map(movie => (
@@ -48,19 +43,19 @@ const Home = () => {
                 state: { from: location },
               }}
               className={css.link}
-            > 
-                <img width="250px"
-                    src={
-                      movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-                        : noImage
-                    }
-                    alt={movie.title}
-                    className={css.poster}
-                  />      
-             {/* <span className={css.movieTitle}>{movie.title}</span> */}
-             </Link>
-    
+            >
+              <img
+                width="250px"
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                    : noImage
+                }
+                alt={movie.title}
+                className={css.poster}
+              />
+              {/* <span className={css.movieTitle}>{movie.title}</span> */}
+            </Link>
           </li>
         ))}
       </ul>

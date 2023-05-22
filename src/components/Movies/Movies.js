@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link, useLocation } from 'react-router-dom';
-import SearchBox from 'components/SearchBox/SearchBox';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+import SearchBox from 'components/SearchBox/SearchBox';
 import getMovies from 'services/getMovies';
 import END_POINTS from '../../services/END_POINTS';
 import API_KEY from '../../services/API_KEY';
@@ -10,26 +11,38 @@ import noImage from '../../images/no_image.jpg';
 import css from './Movies.module.css';
 
 const Movies = () => {
-
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(null);
   const [searchResult, setSearchResult] = useState([]);
 
   const [page] = useState(1);
   const [end_point] = useState(END_POINTS.querySearch);
   const location = useLocation();
 
+  // setSearchQuery(searchParams.get('query'));
+
   useEffect(() => {
-    
     setSearchQuery(searchParams.get('query'));
 
-    if (searchQuery === '' || searchQuery === "null") {
+    if (searchParams === '' || searchParams === 'null') {
+      return;
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (searchQuery === '' || searchQuery === 'null') {
       return;
     }
 
     const url = `${end_point}?api_key=${API_KEY}&page=${page}&query=${searchQuery}&language=en-US&include_adult=false`;
 
-    getMovies(url).then(response => setSearchResult(response.data.results));
+    getMovies(url).then(response => {
+      if (response.data.results.length === 0) {
+        Notify.warning('Please check the request and try again!');
+      }
+
+      setSearchResult(response.data.results);
+    });
 
     // eslint-disable-next-line
   }, [searchQuery]);

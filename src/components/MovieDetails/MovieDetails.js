@@ -6,7 +6,7 @@ import END_POINTS from '../../services/END_POINTS';
 import API_KEY from '../../services/API_KEY';
 import getMovies from 'services/getMovies';
 import noImage from '../../images/no_image.jpg';
-import translateText from '../../services/getTranslate'
+// import translateText from '../../services/getTranslate'
 
 
 import css from './MovieDetails.module.css';
@@ -15,7 +15,7 @@ const MovieDetails = () => {
   const [page] = useState(1);
   const [end_point] = useState(END_POINTS.movieDetails);
   const [movieDetails, setMovieDetails] = useState([]);
-  const [translatedReview, setTranslatedReview ]  = useState('');
+  // const [translatedReview, setTranslatedReview ]  = useState('');
 
 
 
@@ -29,10 +29,14 @@ const MovieDetails = () => {
     // eslint-disable-next-line
   }, []);
 
+  
+
 
   const { title, overview } = movieDetails;
 
-  translateText(overview).then(translate => setTranslatedReview(translate))
+  // useEffect(() => { translateText(overview).then(translate => setTranslatedReview(translate)) }, [overview]);
+
+  // translateText(overview).then(translate => setTranslatedReview(translate))
 
 
 
@@ -59,8 +63,8 @@ const MovieDetails = () => {
 
           <h3>Overview </h3>
           <div>{overview}</div>
-        
-          <div className={css.overviewUkr}>{translatedReview}</div>
+{/*         
+          <div className={css.overviewUkr}>{translatedReview}</div> */}
 
           {movieDetails.genres && (
             <>
